@@ -1,0 +1,29 @@
+$border-color:  #bbbfca
+$bgr-event-cld: #f4f4f2
+$bgr-odd-cld:   #e8e8e8
+
+.main-content__row 
+    display: flex
+    border: 2px solid $border-color
+    padding: 10px
+    margin-bottom: 5px
+    border-radius: 2px
+    align-self: flex-start
+    // width: fit-content
+    &>*
+        min-width: 350px
+        word-wrap: break-word
+        display: flex
+        align-items: center
+        // word-break: break-word
+        // flex-shrink: 0
+        word-break: break-word
+        & + *
+            padding-right: 15px
+    &:nth-child(even)
+        background: $bgr-event-cld
+    &:nth-child(odd)
+        background: $bgr-odd-cld
+
+
+
