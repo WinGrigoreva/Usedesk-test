@@ -3,14 +3,15 @@ import s from "./Row.module.sass";
 import React from "react";
 
 export class Row extends React.Component {
-    render () {
+    render() {
+        let buffer = Object.keys(this.props.dataElement);
         return (
             <div className={s["main-content__row"]}>
-                {Object.keys(this.props.dataElement).map((key)=>{
+                {buffer.map((element) => {
                     return (
-                    <div key={this.props.dataElement.id+key}>
-                        {this.props.dataElement[key]}
-                    </div>
+                        <div className={s["main-content__row-cell"]} key={this.props.dataElement.id + element}>
+                            {this.props.dataElement[element]}
+                        </div>
                     )
                 })}
             </div>

@@ -9,21 +9,19 @@ $bgr-odd-cld:   #e8e8e8
     margin-bottom: 5px
     border-radius: 2px
     align-self: flex-start
-    // width: fit-content
-    &>*
-        min-width: 350px
-        word-wrap: break-word
-        display: flex
-        align-items: center
-        // word-break: break-word
-        // flex-shrink: 0
-        word-break: break-word
-        & + *
-            padding-right: 15px
     &:nth-child(even)
         background: $bgr-event-cld
     &:nth-child(odd)
         background: $bgr-odd-cld
+        
+.main-content__row-cell
+    width: 350px
+    display: flex
+    align-items: center
+    word-break: break-word
+    & + *
+        padding-right: 15px
+    
 
 
 

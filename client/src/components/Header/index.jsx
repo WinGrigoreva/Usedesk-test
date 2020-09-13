@@ -8,7 +8,7 @@ export class Header extends React.Component {
         return (
             <section className={s.header}>
                 <HeaderLogo />
-                <h1 className={s["header-title"]}>Collections</h1>
+                <h1 className={s.header__title}>Collections</h1>
             </section>
         )
     }

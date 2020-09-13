@@ -1,15 +1,20 @@
 import React from "react";
 
-import s from "./FooterContact.module.sass"
+import s from "./FooterContact.module.sass";
 
+import { inject, observer } from "mobx-react";
+
+@inject ("MainStore")
+@observer
 export class FooterContact extends React.Component {
     render() {
+        const mainStore = this.props.MainStore;
         return (
             <div className={s["contacts__info-box"]}>
-                <span className="contacts__info-title">Нижний Новгород</span>
-                <a className="contacts__info-phone" href="tel:+81111111111">+8 (111) 111– 11 – 11</a>
-                <a className="contacts__info-mail"
-                  href="mailto:test@mail.ru">test@mail.ru</a>
+                <span className={s["contacts__info-title"]}>{mainStore.city}</span>
+                <a className={s["contacts__info-phone"]} href={"tel:"+mainStore.telephone.tel}>{mainStore.telephone.displayTel}</a>
+                <a className={s["contacts__info-mail"]}
+                  href={"mailto:"+mainStore.mail}>{mainStore.mail}</a>
             </div>
         )
     }

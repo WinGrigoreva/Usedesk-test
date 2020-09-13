@@ -40,19 +40,20 @@ export class TableStore {
             this.directionOrder.key = key;
             this.directionOrder.isDesc = true;
         }
-        console.log(sortArr.map((el)=>{
-            return el[key];
-        }));
-        console.log(this.directionOrder);
         this.data = sortArr;
     }
 
+    @action checkColumn = (key, isCheck) => {
+        this.keys = this.keys.map((element)=>{
+            if (element.key == key) element.isCheck = isCheck;
+            return element;
+        });
+    }
+
     constructor() {
-        //настройки для запроса для разрешение обращаться к https://api.github.com/users/WinGrigoreva/repos
         var settings = {
             "Content-Security-Policy": "default-src 'self'; connect-src 'self' https://api.github.com https://api.github.com/users/ngrigorev/repos"
         };
-        //выполняем запрос и ждем, когда он отработает
         fetch("https://api.github.com/users/WinGrigoreva/repos", settings)
         .then((response)=>{
             return response.json();
@@ -62,7 +63,10 @@ export class TableStore {
                 e.owner = JSON.stringify(e.owner);
                 return e;
             });
-            this.keys = json && json.length ? Object.keys(json[0]) : [];
+            const keysApi = json && json.length ? Object.keys(json[0]) : [];
+            this.keys = keysApi.map((element)=>{
+                return {key: element, isCheck: false};
+            });
         }).catch((error)=>{
             console.log(error);
             this.data = [];

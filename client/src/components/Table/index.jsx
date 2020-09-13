@@ -10,11 +10,27 @@ import { inject, observer } from "mobx-react";
 @observer
 export class Table extends React.Component {
     render() {
+        const tableStore = this.props.TableStore;
+        let keysChecked = [];
+        let dataChecked = [];
+        if (tableStore.keys.filter((element)=>element.isCheck).length == 0) {
+            keysChecked = tableStore.keys;
+            dataChecked = tableStore.data;
+    } else {
+            keysChecked = tableStore.keys.filter((element)=>element.isCheck);
+            dataChecked = tableStore.data.map((element)=>{
+                let newElement = {};
+                for (const obj of keysChecked) {
+                        newElement[obj.key] = element[obj.key];                        
+                }
+                return newElement;
+            }); 
+    }
         return (
             <div className={s["main-content__table"]}>
-                <HeaderTable headers={this.props.TableStore.keys} handlerSort={this.props.TableStore.sortTable}/>
+                <HeaderTable headers={keysChecked} handlerSort={tableStore.sortTable}/>
                 <div className={s["main-content__table-body"]}>
-                    {this.props.TableStore.data.map((element) => {
+                    {dataChecked.map((element) => {
                         return <Row dataElement={element} key={element.id} />
                     })}
                 </div>
